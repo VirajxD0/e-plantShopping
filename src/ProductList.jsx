@@ -3,13 +3,25 @@ import './ProductList.css';
 import CartItem from './CartItem';
 import { useDispatch } from 'react-redux';
 import { addItem } from './CartSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem } from './CartSlice';
+
 
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false);
     const [addedToCart, setAddedToCart] = useState({});
     const dispatch = useDispatch();
-
+    const dispatch = useDispatch();
+    const cartItems = useSelector(state => state.cart.items);
+    const handleAddToCart = (plant) => {
+        dispatch(addItem(plant));
+        setAddedToCart(prev => ({ ...prev, [plant.name]: true }));
+      };
+      
+    // Calculate total quantity of items in cart
+    const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -123,7 +135,7 @@ function ProductList({ onHomeClick }) {
                 </div>
                 <div style={styleObjUl}>
                     <div><a href="#" onClick={handlePlantsClick} style={styleA}>Plants</a></div>
-                    <div><a href="#" onClick={handleCartClick} style={styleA}><h1 className='cart'>🛒</h1></a></div>
+                    <div><a href="#" onClick={handleCartClick} style={styleA}><h1 className='cart'>🛒<span className="cart-count">{totalCartItems}</span></h1></a></div>
                 </div>
             </div>
 
