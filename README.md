@@ -29,3 +29,5 @@ Welcome to **Paradise Nursery**, a modern, responsive e-commerce application bui
 ```bash
 git clone https://github.com/your-username/e-plantShopping.git
 cd e-plantShopping
+
+<img width="1710" alt="Screenshot 2025-06-22 at 8 01 04 PM" src="https://github.com/user-attachments/assets/d72d5912-ec16-4172-a253-37e497963202" />
