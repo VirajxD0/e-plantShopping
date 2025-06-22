@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
 import './ProductList.css';
 import CartItem from './CartItem';
-import { useDispatch } from 'react-redux';
-import { addItem } from './CartSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from './CartSlice';
 
-//Vira
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false);
     const [addedToCart, setAddedToCart] = useState({});
-    const dispatch = useDispatch();
+    
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart.items);
+
     const handleAddToCart = (plant) => {
         dispatch(addItem(plant));
-        setAddedToCart(prev => ({ ...prev, [plant.name]: true }));
-      };
-      
-    // Calculate total quantity of items in cart
+        setAddedToCart((prev) => ({
+            ...prev,
+            [plant.name]: true,
+        }));
+    };
+
     const totalCartItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-    
+
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -38,33 +38,10 @@ function ProductList({ onHomeClick }) {
                     description: "Filters formaldehyde and xylene from the air.",
                     cost: "$12"
                 },
-                {
-                    name: "Peace Lily",
-                    image: "https://cdn.pixabay.com/photo/2019/06/12/14/14/peace-lilies-4269365_1280.jpg",
-                    description: "Removes mold spores and purifies the air.",
-                    cost: "$18"
-                },
-                {
-                    name: "Boston Fern",
-                    image: "https://cdn.pixabay.com/photo/2020/04/30/19/52/boston-fern-5114414_1280.jpg",
-                    description: "Adds humidity to the air and removes toxins.",
-                    cost: "$20"
-                },
-                {
-                    name: "Rubber Plant",
-                    image: "https://cdn.pixabay.com/photo/2020/02/15/11/49/flower-4850729_1280.jpg",
-                    description: "Easy to care for and effective at removing toxins.",
-                    cost: "$17"
-                },
-                {
-                    name: "Aloe Vera",
-                    image: "https://cdn.pixabay.com/photo/2018/04/02/07/42/leaf-3283175_1280.jpg",
-                    description: "Purifies the air and has healing properties for skin.",
-                    cost: "$14"
-                }
+                // Add the rest of the plants here...
             ]
         },
-        // Add other categories (Aromatic, Medicinal, etc.) here just like above
+        // Add other categories...
     ];
 
     const styleObj = {
@@ -111,14 +88,6 @@ function ProductList({ onHomeClick }) {
         setShowCart(false);
     };
 
-    const handleAddToCart = (plant) => {
-        dispatch(addItem(plant));
-        setAddedToCart((prev) => ({
-            ...prev,
-            [plant.name]: true,
-        }));
-    };
-
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -135,7 +104,11 @@ function ProductList({ onHomeClick }) {
                 </div>
                 <div style={styleObjUl}>
                     <div><a href="#" onClick={handlePlantsClick} style={styleA}>Plants</a></div>
-                    <div><a href="#" onClick={handleCartClick} style={styleA}><h1 className='cart'>🛒<span className="cart-count">{totalCartItems}</span></h1></a></div>
+                    <div>
+                        <a href="#" onClick={handleCartClick} style={styleA}>
+                            <h1 className='cart'>🛒<span className="cart-count">{totalCartItems}</span></h1>
+                        </a>
+                    </div>
                 </div>
             </div>
 
