@@ -6,7 +6,7 @@ import { addItem } from './CartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { addItem } from './CartSlice';
 
-
+//Vira
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false);
